@@ -8,8 +8,28 @@ public class PlayerController : MonoBehaviour
 
     private float _horizontal;
     private float _vertical;
+    private Rigidbody2D _rb;
 
-    public Vector2 Direction { get; private set;  }
+    public Vector2 Direction { get; private set; }
 
-    //player movement tramite rb.MovePosition()
+
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
+    //movimento player tramite rb.MovePosition()
+
+    void Update()
+    {
+        _horizontal = Input.GetAxis("Horizontal");
+        _vertical = Input.GetAxis("Vertical");
+
+        Direction = new Vector2(_horizontal, _vertical).normalized;
+    }
+
+    private void FixedUpdate()
+    {
+        _rb.MovePosition(_rb.position + Direction * (_speed * Time.deltaTime));
+    }
 }

@@ -2,9 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LifeController
+public class LifeController : MonoBehaviour
 {
-    //assegnata come compo sia al Player che ai Enemy
-    //gestirre vita e danno ricevuto
-    //if vita <= 0 {  Destroy(GameObject)  }
+    [SerializeField] private int _hp = 10;
+
+    //gestire vita e danno ricevuto
+    public float GetHp() => _hp;
+
+    public void SetHp(int hp)
+    {
+        _hp = Mathf.Max(0, hp);
+
+        if (hp <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void AddHp(int amount) => SetHp(_hp + amount);
+
+    public void TakeDamage(int damage) => AddHp(-damage);
+
 }

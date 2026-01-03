@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    //muovere la camera in base alla posizione del player
+    [SerializeField] private Transform _target;
+
+    private void LateUpdate()
+    {
+        transform.position = new Vector3(_target.position.x, _target.position.y, transform.position.z);
+    }
 }
