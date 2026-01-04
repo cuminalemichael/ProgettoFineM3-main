@@ -5,49 +5,31 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Transform _target;
-    [SerializeField] float _speed = 2f;
+    [SerializeField] private float _speed = 5;
     [SerializeField] private int _dmg = 2;
-    private PlayerController _playerController;
+
+    private Rigidbody2D _rb;
     private Animator _animator;
-    private LifeController _lifeController;
 
     private void Awake()
     {
-        _playerController = GetComponent<PlayerController>();
+        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-        _lifeController = GetComponent<LifeController>();
-    }
 
-    void Start()
-    {
-        GameObject gameObject = GameObject.FindGameObjectWithTag("Player");
-        if (gameObject != null)
+        if (_target == null)
         {
-            _target = gameObject.transform;
+            GameObject gameObj = GameObject.FindGameObjectWithTag("Player");
+            if (gameObj != null)
+            {
+                _target = gameObj.transform;
+            }
         }
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
         EnemyMovement();
-        EnemyAnimator();
-    }
-
-    void EnemyMovement()
-    {
-        transform.position = Vector2.(transform.position, _target.position, _speed * Time.deltaTime).normalized;
-    }
-
-    private void EnemyAnimator()
-    {
-        Vector2 dir = new Vector2(transform.position.x, transform.position.y);
-        if (_target != null)
-        {
-            Vector2 dir2 = dir - new Vector2(_target.transform.position.x, _target.transform.position.y);
-
-            _animator.SetFloat("xSpeed", dir2.x);
-            _animator.SetFloat("ySpeed", dir2.y);
-        }
     }
 
 
@@ -58,6 +40,23 @@ public class Enemy : MonoBehaviour
             collision.collider.GetComponent<LifeController>().TakeDamage(_dmg);
             Destroy(gameObject);
         }
+    }
+
+    //movimento e animazione Enemy
+    void EnemyMovement()
+    {
+        Vector2 toTarget = (_target.position - transform.position).normalized;
+        _rb.MovePosition(_rb.position + toTarget * (_speed * Time.deltaTime));
+        //transform.position = Vector2.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+
+        EnemyAnimator(toTarget);
+    }
+
+
+    private void EnemyAnimator(Vector2 dir)
+    {
+        _animator.SetFloat("xSpeed", dir.x);
+        _animator.SetFloat("ySpeed", dir.y);
     }
 }
 

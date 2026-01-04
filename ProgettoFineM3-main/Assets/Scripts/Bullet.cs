@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float _speed = 10f;
+    [SerializeField] private float _speed = 8;
     [SerializeField] private int _dmg = 3;
-    [SerializeField] private float _lifeTime = 3f;
+    [SerializeField] private float _lifeTime = 5;
 
-    public Vector2 _dir { get; private set; }
+    public Vector2 _dir;
     private Rigidbody2D _rb;
 
     private void Awake()
@@ -29,14 +29,19 @@ public class Bullet : MonoBehaviour
     }
 
 
+    public void SetDirection(Vector2 dir)
+    {
+        _dir = dir.normalized;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)      //gestione collisione con enemy o objects
     {                                                           //gestione danno inflitto da bullet
-        if (collision.collider.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.collider.GetComponent<LifeController>().TakeDamage(_dmg);
+            collision.gameObject.GetComponent<LifeController>().TakeDamage(_dmg);
             Destroy(gameObject);
         }
-        else if (collision.collider.CompareTag("Objects"))
+        else if (collision.gameObject.CompareTag("Objects"))
         {
             Destroy(gameObject);
         }

@@ -12,8 +12,9 @@ public class LifeController : MonoBehaviour
     public void SetHp(int hp)
     {
         _hp = Mathf.Max(0, hp);
+        Debug.Log($"{gameObject.name} HP: {_hp}");
 
-        if (hp <= 0)
+        if (_hp <= 0)
         {
             Destroy(gameObject);
         }

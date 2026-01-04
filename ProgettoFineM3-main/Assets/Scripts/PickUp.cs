@@ -5,28 +5,18 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
     [SerializeField] private GameObject _weaponPrefab;
-    [SerializeField] private Transform _player;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            EquipWeapon(other.transform);
+            GameObject weapon = Instantiate(_weaponPrefab, other.transform);    //istanzia il prefab come figlio di Player
+            Gun gun = other.GetComponentInChildren<Gun>();   //prende il componente Gun dal player o dai suoi figli
+            if (gun != null)
+            {
+                gun.Equip();
+            }
             Destroy(gameObject);
         }
-    }
-
-    private void EquipWeapon(Transform player)   //quando Player raccoglie arma viene istanziato il prefab dell'arma come child di Player
-    {
-        if (_weaponPrefab == null) return;
-
-        if (_player == null)
-        {
-            _player = player.Find("Player");
-        }
-       
-        //l'arma si vede equipaggiata al player
-
-        GameObject newWeapon = Instantiate(_weaponPrefab, player);
     }
 }

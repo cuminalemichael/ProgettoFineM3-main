@@ -52465,6 +52465,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3adb6edc915fa54cb7535505f72bec4, type: 3}
+--- !u!1 &902732270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 902732271}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &902732271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902732270}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.2329893, y: -3.2804625, z: -0.3161315}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1889672773}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1188016673
 GameObject:
   m_ObjectHideFlags: 0
@@ -52675,7 +52706,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _weaponPrefab: {fileID: 3150331633923742177, guid: 4ca4a82138fcd5d4d9572ddf5ece6f42, type: 3}
-  _player: {fileID: 1889672773}
 --- !u!1001 &1465728727
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52913,7 +52943,7 @@ GameObject:
   - component: {fileID: 1889672778}
   - component: {fileID: 1889672779}
   - component: {fileID: 1889672780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeonSK
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -52928,7 +52958,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1889672771}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -52959,7 +52989,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 902732271}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!70 &1889672774
@@ -53107,9 +53138,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c862ae2b0f01846abc336ea87aa183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: -1218498370427315134, guid: 65c5eb81481271f4581c85adcacb3230, type: 3}
+  _bulletPrefab: {fileID: 4551784577119848899, guid: 65c5eb81481271f4581c85adcacb3230, type: 3}
   _fireRate: 0.5
-  _fireRange: 5
+  _fireRange: 7
 --- !u!114 &1889672780
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59529,6 +59560,14 @@ PrefabInstance:
     - target: {fileID: 3150331633923742177, guid: 4ca4a82138fcd5d4d9572ddf5ece6f42, type: 3}
       propertyPath: m_Name
       value: Pistol
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243554402805245817, guid: 4ca4a82138fcd5d4d9572ddf5ece6f42, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243554402805245817, guid: 4ca4a82138fcd5d4d9572ddf5ece6f42, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -2039046409
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

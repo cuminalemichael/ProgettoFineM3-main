@@ -6,13 +6,17 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private float _fireRate = 0.5f;
-    [SerializeField] private float _fireRange = 5f;
+    [SerializeField] private float _fireRate = 0.7f;
+    [SerializeField] private float _fireRange = 6;
 
     private float _lastShot;
+    private bool _equipped = false; //controllo se il player ha raccolto l'arma
 
     void Update()
     {
+        if (_equipped == false)     //se l'arma non è equipaggita allora non spara
+            return;
+
         if (Input.GetButtonDown("Fire1") && Time.time - _lastShot >= _fireRate)
         {
             GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -27,22 +31,27 @@ public class Gun : MonoBehaviour
         }
     }
 
+
+    public void Equip()
+    {
+        _equipped = true;
+    }
+
     private void Shoot(Vector2 dir)
     {
-        Bullet bullet = Instantiate(_bulletPrefab);
+        Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+        bullet.SetDirection(dir);
     }
 
 
     private Transform FindClosestEnemy(GameObject[] enemies)
     {
         Transform closestEnemy = null;
-
         float fireRange = _fireRange;
-        Vector2 currentPosition = transform.position;
 
         foreach (GameObject enemy in enemies)
         {
-            float range = Vector2.Distance(currentPosition, enemy.transform.position);
+            float range = Vector2.Distance(transform.position, enemy.transform.position);
             if (range <= fireRange)
             {
                 fireRange = range;
@@ -51,5 +60,4 @@ public class Gun : MonoBehaviour
         }
         return closestEnemy;
     }
-
 }

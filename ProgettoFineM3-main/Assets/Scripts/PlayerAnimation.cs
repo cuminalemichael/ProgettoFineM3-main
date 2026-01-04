@@ -17,7 +17,7 @@ public class PlayerAnimation : MonoBehaviour
     {
         //gestione animazioni se il player si muove
 
-       if(_playerController.Direction != Vector2.zero)
+        if (_playerController.Direction != Vector2.zero)
         {
             _animator.SetBool("isMoving", true);
             _animator.SetFloat("xSpeed", _playerController.Direction.x);

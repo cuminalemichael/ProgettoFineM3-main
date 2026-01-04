@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float _horizontal;
     private float _vertical;
     private Rigidbody2D _rb;
+    private bool isAlive = false;       //aggiungere IsAlive per far uscire in runtime error se il player muore
 
     public Vector2 Direction { get; private set; }
 
@@ -30,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rb.MovePosition(_rb.position + Direction * (_speed * Time.deltaTime));
+        if (Direction != Vector2.zero)
+            _rb.MovePosition(_rb.position + Direction * (_speed * Time.deltaTime));
     }
 }
